@@ -1,0 +1,7 @@
+LIBRARY	"LuaWoW"
+
+EXPORTS
+	GetLexerCount = GetLexerCount
+	GetLexerName = GetLexerName
+	GetLexerStatusText = GetLexerStatusText
+	GetLexerFactory = GetLexerFactory

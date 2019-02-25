@@ -1,0 +1,2 @@
+Notepad++ sources need to be extracted in the parent directory
+See https://github.com/notepad-plus-plus/notepad-plus-plus

@@ -1,0 +1,13 @@
+/_archive
+/lua*
+/notepad-plus-plus
+/release*/
+/dll/Win32
+/dll/x64
+/dll/.vs
+/dll/*.user
+/api/raw.githubusercontent.com
+/api/wow.gamepedia.com
+/api/wowprogramming.com
+/api/completion.xml
+/api/highlight.xml

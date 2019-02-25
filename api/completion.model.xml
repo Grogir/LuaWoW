@@ -1,0 +1,14 @@
+<!--
+	LuaWoW - AutoComplete
+	Author: Grogir
+	Licence: GNU GPL
+	This file has been auto-generated with documentation from lua.org, wow.gamepedia.com, wowprogramming.com
+-->
+<?xml version="1.0" encoding="Windows-1252" ?>
+<NotepadPlus>
+    <Environment ignoreCase="no" startFunc="(" stopFunc=")" paramSeparator="," terminal=";" additionalWordChar = ".:"/>
+    <AutoComplete language="LUA">
+
+<!-- KEYWORDS -->
+	</AutoComplete>
+</NotepadPlus>

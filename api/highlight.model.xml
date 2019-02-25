@@ -1,0 +1,87 @@
+<!--
+	LuaWoW - Syntax Highlighting
+	Author: Grogir
+	Licence: GNU GPL
+	This file has been auto-generated with data from github.com/Resike/BlizzardInterfaceResources
+-->
+<?xml version="1.0" encoding="Windows-1252" ?>
+<NotepadPlus>
+    <Languages>
+        <Language name="LuaWoW" ext="lua" commentLine="--" commentStart="--[[" commentEnd="]]">
+            <!-- lua keywords -->
+            <Keywords name="0">and arg break do elseif else end false for function if in local nil not or repeat return then true until while</Keywords>
+            <!-- lua globals -->
+            <Keywords name="1"><!-- LUAGLOBALS --></Keywords>
+            <!-- api -->
+            <Keywords name="2"><!-- API --></Keywords>
+            <!-- ui + ace3 -->
+            <Keywords name="3"><!-- UI + ACE3 --></Keywords>
+            <!-- tables -->
+            <Keywords name="4"><!-- TABLES --></Keywords>
+            <Keywords name="5" />
+            <Keywords name="6" />
+            <Keywords name="7" />
+            <Keywords name="8" />
+        </Language>
+    </Languages>
+    <LexerStyles>
+        <!-- we can't define multiples styles right now, only one of those should have name="LuaWoW" -->
+        <LexerType name="LuaWoW" desc="LuaWoW1" excluded="no" ext="lua">
+            <WordsStyle name="DEFAULT" styleID="0" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="0" />
+            <WordsStyle name="COMMENT" styleID="1" fgColor="008000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="COMMENT LINE" styleID="2" fgColor="008000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="COMMENT DOC" styleID="3" fgColor="008080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="LITERALSTRING" styleID="8" fgColor="95004A" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="PREPROCESSOR" styleID="9" fgColor="804000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="NUMBER" styleID="4" fgColor="FF8000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="STRING" styleID="6" fgColor="808080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="CHARACTER" styleID="7" fgColor="808080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="OPERATOR" styleID="10" fgColor="000080" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" colorStyle="1" />
+            <WordsStyle name="IDENTIFIER" styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="0" />
+            <WordsStyle name="LABEL" styleID="20" fgColor="808000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="INSTRUCTION WORD" styleID="5" fgColor="0000FF" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="0" colorStyle="1" />
+            <WordsStyle name="LUA FUNCTIONS" styleID="13" fgColor="8080FF" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="1" colorStyle="1" />
+            <WordsStyle name="WOW API FUNCTIONS" styleID="14" fgColor="8000FF" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="2" colorStyle="1" />
+            <WordsStyle name="WOW UI FUNCTIONS" styleID="15" fgColor="0080C0" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="3" colorStyle="1" />
+            <WordsStyle name="WOW GLOBAL TABLES" styleID="16" fgColor="D50000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="4" colorStyle="1" />
+        </LexerType>
+        <LexerType name="LuaWoW2" desc="LuaWoW2" excluded="no" ext="lua">
+            <WordsStyle name="DEFAULT" styleID="0" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="0" />
+            <WordsStyle name="COMMENT" styleID="1" fgColor="008000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="COMMENT LINE" styleID="2" fgColor="008000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="COMMENT DOC" styleID="3" fgColor="008080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="LITERALSTRING" styleID="8" fgColor="95004A" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="PREPROCESSOR" styleID="9" fgColor="804000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="NUMBER" styleID="4" fgColor="FFCD22" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="STRING" styleID="6" fgColor="EC7600" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="CHARACTER" styleID="7" fgColor="EC7600" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="OPERATOR" styleID="10" fgColor="E8E2B7" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" colorStyle="1" />
+            <WordsStyle name="IDENTIFIER" styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="0" />
+            <WordsStyle name="LABEL" styleID="20" fgColor="808000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="INSTRUCTION WORD" styleID="5" fgColor="93C763" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="0" colorStyle="1" />
+            <WordsStyle name="LUA FUNCTIONS" styleID="13" fgColor="AEAEFF" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="1" colorStyle="1" />
+            <WordsStyle name="WOW API FUNCTIONS" styleID="14" fgColor="BD9AE4" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="2" colorStyle="1" />
+            <WordsStyle name="WOW UI FUNCTIONS" styleID="15" fgColor="2984AF" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="3" colorStyle="1" />
+            <WordsStyle name="WOW GLOBAL TABLES" styleID="16" fgColor="D50000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="4" colorStyle="1" />
+        </LexerType>
+        <LexerType name="LuaWoW3" desc="LuaWoW3" excluded="no" ext="lua">
+            <WordsStyle name="DEFAULT" styleID="0" fgColor="C8C8C8" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="0" />
+            <WordsStyle name="COMMENT" styleID="1" fgColor="57A64A" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="COMMENT LINE" styleID="2" fgColor="57A64A" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="COMMENT DOC" styleID="3" fgColor="57A64A" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="LITERALSTRING" styleID="8" fgColor="D69D85" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="PREPROCESSOR" styleID="9" fgColor="9B9B9B" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="NUMBER" styleID="4" fgColor="A6CEA8" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="STRING" styleID="6" fgColor="D69D85" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="CHARACTER" styleID="7" fgColor="D69D85" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="OPERATOR" styleID="10" fgColor="9B9B9B" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" colorStyle="1" />
+            <WordsStyle name="IDENTIFIER" styleID="11" fgColor="C8C8C8" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="0" />
+            <WordsStyle name="LABEL" styleID="20" fgColor="808000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="1" />
+            <WordsStyle name="INSTRUCTION WORD" styleID="5" fgColor="559CD6" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="0" colorStyle="1" />
+            <WordsStyle name="LUA FUNCTIONS" styleID="13" fgColor="AEAEFF" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="1" colorStyle="1" />
+            <WordsStyle name="WOW API FUNCTIONS" styleID="14" fgColor="C184FF" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="2" colorStyle="1" />
+            <WordsStyle name="WOW UI FUNCTIONS" styleID="15" fgColor="209B98" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="3" colorStyle="1" />
+            <WordsStyle name="WOW GLOBAL TABLES" styleID="16" fgColor="FF8080" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" keywordClass="4" colorStyle="1" />
+        </LexerType>
+    </LexerStyles>
+</NotepadPlus>
