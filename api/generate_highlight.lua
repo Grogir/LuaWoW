@@ -53,7 +53,7 @@ ui=getmap(getpage(path.."/WidgetAPI.lua").."\n"..getfile("Ace3.txt"))
 out=out:gsub("<!%-%- UI %+ ACE3 %-%->",getsortednames(ui))
 
 -- global tables
-all=getpage(path.."/Data/GlobalTypes.lua.txt")
+all=getpage(path.."/Data/GlobalTypes.lua")
 tables={}
 for name,type in all:gmatch('(%S+) = "(%S+)"') do
 	if type~="string" and type~="function" and type~="number" and type~="boolean" and not exists(name) then

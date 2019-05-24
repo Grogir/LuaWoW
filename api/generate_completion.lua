@@ -34,7 +34,7 @@ end
 -- 1. Get all entries we want to include
 
 db={}
-all=getpage(respath.."/Data/GlobalTypes.lua.txt") -- globals
+all=getpage(respath.."/Data/GlobalTypes.lua") -- globals
 for name,type in all:gmatch('(%S+) = "(%S+)"') do
 	if type~="string" and type~="number" and type~="boolean" then
 		db[name]={func=type=="function",ov={}}
