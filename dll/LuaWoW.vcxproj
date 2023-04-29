@@ -23,6 +23,9 @@
     <ProjectGuid>{18066061-A634-4653-AD88-7334BFE63C94}</ProjectGuid>
     <RootNamespace>LuaWoW</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <IncludePath>..\notepad-plus-plus;..\notepad-plus-plus\scintilla\include;..\notepad-plus-plus\lexilla\include;%(IncludePath)</IncludePath>
+    <LinkIncremental Condition="'$(Configuration)'=='Debug'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)'=='Release'">false</LinkIncremental>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -83,9 +86,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\notepad-plus-plus;..\notepad-plus-plus\scintilla\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>
@@ -108,9 +111,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\notepad-plus-plus;..\notepad-plus-plus\scintilla\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>
@@ -135,9 +138,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\notepad-plus-plus;..\notepad-plus-plus\scintilla\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -164,9 +167,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\notepad-plus-plus;..\notepad-plus-plus\scintilla\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -186,19 +189,21 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\notepad-plus-plus\scintilla\lexlib\Accessor.cxx" />
-    <ClCompile Include="..\notepad-plus-plus\scintilla\lexlib\LexerBase.cxx" />
-    <ClCompile Include="..\notepad-plus-plus\scintilla\lexlib\PropSetSimple.cxx" />
-    <ClCompile Include="..\notepad-plus-plus\scintilla\lexlib\StyleContext.cxx" />
-    <ClCompile Include="..\notepad-plus-plus\scintilla\lexlib\WordList.cxx" />
+    <ClCompile Include="..\notepad-plus-plus\lexilla\lexlib\Accessor.cxx" />
+    <ClCompile Include="..\notepad-plus-plus\lexilla\lexlib\LexAccessor.cxx" />
+    <ClCompile Include="..\notepad-plus-plus\lexilla\lexlib\DefaultLexer.cxx" />
+    <ClCompile Include="..\notepad-plus-plus\lexilla\lexlib\PropSetSimple.cxx" />
+    <ClCompile Include="..\notepad-plus-plus\lexilla\lexlib\StyleContext.cxx" />
+    <ClCompile Include="..\notepad-plus-plus\lexilla\lexlib\WordList.cxx" />
     <ClCompile Include="LuaWoW.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\notepad-plus-plus\scintilla\lexlib\Accessor.h" />
-    <ClInclude Include="..\notepad-plus-plus\scintilla\lexlib\LexerBase.h" />
-    <ClInclude Include="..\notepad-plus-plus\scintilla\lexlib\PropSetSimple.h" />
-    <ClInclude Include="..\notepad-plus-plus\scintilla\lexlib\StyleContext.h" />
-    <ClInclude Include="..\notepad-plus-plus\scintilla\lexlib\WordList.h" />
+    <ClInclude Include="..\notepad-plus-plus\lexilla\lexlib\Accessor.h" />
+    <ClInclude Include="..\notepad-plus-plus\lexilla\lexlib\LexAccessor.h" />
+    <ClInclude Include="..\notepad-plus-plus\lexilla\lexlib\DefaultLexer.h" />
+    <ClInclude Include="..\notepad-plus-plus\lexilla\lexlib\PropSetSimple.h" />
+    <ClInclude Include="..\notepad-plus-plus\lexilla\lexlib\StyleContext.h" />
+    <ClInclude Include="..\notepad-plus-plus\lexilla\lexlib\WordList.h" />
     <ClInclude Include="LuaWoW.h" />
   </ItemGroup>
   <ItemGroup>

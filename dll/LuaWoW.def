@@ -1,6 +1,7 @@
 LIBRARY	"LuaWoW"
 
 EXPORTS
+	CreateLexer = CreateLexer
 	GetLexerCount = GetLexerCount
 	GetLexerName = GetLexerName
 	GetLexerStatusText = GetLexerStatusText

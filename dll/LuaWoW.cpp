@@ -37,7 +37,6 @@ BOOL APIENTRY DllMain(HANDLE /*hModule*/, DWORD reasonForCall, LPVOID /*lpReserv
 	return TRUE;
 }
 
-#define EXT_LEXER_DECL __declspec( dllexport ) __stdcall
 
 extern "C" {
 
@@ -57,15 +56,36 @@ extern "C" {
 		return pluginMenuItems;
 	}
 
-	__declspec(dllexport) void beNotified(SCNotification * /*notifyCode*/) {}
+	__declspec(dllexport) void beNotified(SCNotification *notifyCode)
+	{
+		switch (notifyCode->nmhdr.code)
+		{
+			case NPPN_BUFFERACTIVATED:
+				[[fallthrough]];
+			case NPPN_LANGCHANGED:
+				[[fallthrough]];
+			case NPPN_WORDSTYLESUPDATED:
+			{
+				// Since Npp v8.4, GetLexerStatusText() doesn't work anymore
+				TCHAR extBuffer[16] = {};
+				SendMessage(nppData._nppHandle, NPPM_GETEXTPART, 16, reinterpret_cast<LPARAM>(extBuffer));
+				if (generic_strcmp(extBuffer, L".lua") == 0)
+				{
+					SendMessage(nppData._nppHandle, NPPM_SETSTATUSBAR, STATUSBAR_DOC_TYPE, reinterpret_cast<LPARAM>(LEXER_STATUS_TEXT.c_str()));
+				}
+				break;
+			}
+		}
+	}
+
 	__declspec(dllexport) LRESULT messageProc(UINT /*Message*/, WPARAM /*wParam*/, LPARAM /*lParam*/) { return TRUE; }
 
 
 } // End extern "C"
 
-int EXT_LEXER_DECL GetLexerCount() { return 1; }
+int SCI_METHOD GetLexerCount() { return 1; }
 
-void EXT_LEXER_DECL GetLexerName(unsigned int /*index*/, char *name, int buflength)
+void SCI_METHOD GetLexerName(unsigned int /*index*/, char *name, int buflength)
 {
 	*name=0;
 	if(buflength>0)
@@ -74,7 +94,12 @@ void EXT_LEXER_DECL GetLexerName(unsigned int /*index*/, char *name, int bufleng
 	}
 }
 
-void EXT_LEXER_DECL GetLexerStatusText(unsigned int /*Index*/, TCHAR *desc, int buflength)
+ILexer5* SCI_METHOD CreateLexer(const char* name)
+{
+	return (strcmp(name, LEXER_NAME.c_str()) == 0) ? LexerLuaWoW::LexerFactory() : nullptr;
+}
+
+void SCI_METHOD GetLexerStatusText(unsigned int /*Index*/, TCHAR *desc, int buflength)
 {
 	if(buflength>0)
 	{
@@ -82,7 +107,20 @@ void EXT_LEXER_DECL GetLexerStatusText(unsigned int /*Index*/, TCHAR *desc, int 
 	}
 }
 
-LexerFactoryFunction EXT_LEXER_DECL GetLexerFactory(unsigned int index)
+Sci_Position SCI_METHOD LexerLuaWoW::WordListSet(int n, const char *wl) {
+	WordList *wordListN = nullptr;
+	Sci_Position firstModification = -1;
+
+	if (n < WORDLIST_SIZE) {
+		wordListN = &keywordlists[n];
+	}
+	if (wordListN && wordListN->Set(wl)) {
+		firstModification = 0;
+	}
+	return firstModification;
+}
+
+Lexilla::LexerFactoryFunction SCI_METHOD GetLexerFactory(unsigned int index)
 {
 	if(index==0)
 		return LexerLuaWoW::LexerFactory;
@@ -104,34 +142,6 @@ void LuaWoW::aboutDlg()
 
 }
 
-void SCI_METHOD LexerLuaWoW::Lex(unsigned int startPos, int length, int initStyle, IDocument *pAccess)
-{
-	try
-	{
-		Accessor astyler(pAccess, &props);
-		Colourise_Doc(startPos, length, initStyle, keyWordLists, astyler);
-		astyler.Flush();
-	}
-	catch(...)
-	{
-		// Should not throw into caller as may be compiled with different compiler or options
-		pAccess->SetErrorStatus(SC_STATUS_FAILURE);
-	}
-}
-void SCI_METHOD LexerLuaWoW::Fold(unsigned int startPos, int length, int initStyle, IDocument *pAccess)
-{
-	try
-	{
-		Accessor astyler(pAccess, &props);
-		Fold_Doc(startPos, length, initStyle, keyWordLists, astyler);
-		astyler.Flush();
-	}
-	catch(...)
-	{
-		// Should not throw into caller as may be compiled with different compiler or options
-		pAccess->SetErrorStatus(SC_STATUS_FAILURE);
-	}
-}
 
 static int LongDelimCheck(StyleContext &sc)
 {
@@ -143,22 +153,17 @@ static int LongDelimCheck(StyleContext &sc)
 	return 0;
 }
 
-static void LuaWoW::Colourise_Doc(
-	unsigned int startPos,
-	int length,
-	int initStyle,
-	WordList *keywordlists[],
-	Accessor &styler)
+void SCI_METHOD LexerLuaWoW::Lex(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument* pAccess)
 {
-
-	WordList &keywords=*keywordlists[0];
-	WordList &keywords2=*keywordlists[1];
-	WordList &keywords3=*keywordlists[2];
-	WordList &keywords4=*keywordlists[3];
-	WordList &keywords5=*keywordlists[4];
-	WordList &keywords6=*keywordlists[5];
-	WordList &keywords7=*keywordlists[6];
-	WordList &keywords8=*keywordlists[7];
+	LexAccessor styler(pAccess);
+	WordList &keywords=keywordlists[0];
+	WordList &keywords2=keywordlists[1];
+	WordList &keywords3=keywordlists[2];
+	WordList &keywords4=keywordlists[3];
+	WordList &keywords5=keywordlists[4];
+	WordList &keywords6=keywordlists[5];
+	WordList &keywords7=keywordlists[6];
+	WordList &keywords8=keywordlists[7];
 
 	// Accepts accented characters
 	CharacterSet setWordStart(CharacterSet::setAlpha, "_", 0x80, true);
@@ -488,19 +493,19 @@ static void LuaWoW::Colourise_Doc(
 	sc.Complete();
 }
 
-static void LuaWoW::Fold_Doc(unsigned int startPos, int length, int /* initStyle */, WordList *[],
-	Accessor &styler)
+void SCI_METHOD LexerLuaWoW::Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument* pAccess)
 {
-	unsigned int lengthDoc=startPos + length;
+	LexAccessor styler(pAccess);
+	Sci_PositionU lengthDoc=startPos + length;
 	int visibleChars=0;
 	int lineCurrent=styler.GetLine(startPos);
 	int levelPrev=styler.LevelAt(lineCurrent) & SC_FOLDLEVELNUMBERMASK;
 	int levelCurrent=levelPrev;
 	char chNext=styler[startPos];
-	bool foldCompact=styler.GetPropertyInt("fold.compact", 1) != 0;
+	bool foldCompact=options.foldCompact;
 	int styleNext=styler.StyleAt(startPos);
 
-	for(unsigned int i=startPos; i < lengthDoc; i++) {
+	for(Sci_PositionU i=startPos; i < lengthDoc; i++) {
 		char ch=chNext;
 		chNext=styler.SafeGetCharAt(i + 1);
 		int style=styleNext;
