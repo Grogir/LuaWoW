@@ -69,7 +69,7 @@ extern "C" {
 				// Since Npp v8.4, GetLexerStatusText() doesn't work anymore
 				TCHAR extBuffer[16] = {};
 				SendMessage(nppData._nppHandle, NPPM_GETEXTPART, 16, reinterpret_cast<LPARAM>(extBuffer));
-				if (generic_strcmp(extBuffer, L".lua") == 0)
+				if (generic_strcmp(extBuffer, TEXT(".lua")) == 0)
 				{
 					SendMessage(nppData._nppHandle, NPPM_SETSTATUSBAR, STATUSBAR_DOC_TYPE, reinterpret_cast<LPARAM>(LEXER_STATUS_TEXT.c_str()));
 				}
