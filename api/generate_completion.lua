@@ -9,7 +9,9 @@
 
 dofile("common.lua")
 respath="https://raw.githubusercontent.com/Resike/BlizzardInterfaceResources/master/Resources"
-mkdir(respath.."/Data")
+datapath="https://raw.githubusercontent.com/Resike/BlizzardInterfaceResources/b6abf3b3b320a2a2f1054f20ddd17df6b1a0404c/Resources/Data"
+mkdir(respath)
+mkdir(datapath)
 
 function trim(s)
 	return s and s:match"^%s*(.*%S)"
@@ -34,7 +36,7 @@ end
 -- 1. Get all entries we want to include
 
 db={}
-all=getpage(respath.."/Data/GlobalTypes.lua") -- globals
+all=getpage(datapath.."/GlobalTypes.lua") -- globals
 for name,type in all:gmatch('(%S+) = "(%S+)"') do
 	if type~="string" and type~="number" and type~="boolean" then
 		db[name]={func=type=="function",ov={}}
@@ -70,19 +72,20 @@ end
 
 -- 3. Fill with wowpedia doc
 
-website="https://wow.gamepedia.com"
-mkdir(website)
+website="https://wowpedia.fandom.com"
+mkdir(website.."/wiki")
 
-all=getpage(website.."/World_of_Warcraft_API")..getpage(website.."/Widget_API")
+all=getpage(website.."/wiki/World_of_Warcraft_API")..getpage(website.."/wiki/Widget_API")
 done={}
 
-for tags,link,name,info in all:gmatch('<dd>([^<]-)<a href="(.-API_.-)".->(.-)</a>(.-)</dd>') do
-	if not done[link] then
-		done[link]=true
+for line in all:gmatch("[^\n]+") do
+	link,name,info=line:match('<dd>.-<a href="(/wiki/API_.-)".->(.-)</a>(.-)</dd>')
+	if not link then name,info=line:match('<dd>.-<span class="new" title="API.-".->(.-)</span>(.-)</dd>') end
+	if name and (not link or not done[link]) then
+		if link then done[link]=true end
 		info=trim(purge(info)) or ""
 		local sign=trim(info:match("^%(([^)]*)%)"))
 		local desc=trim((sign and info:sub(#sign+2) or info):match("[() -]*(.-)$"))
-		if desc and desc:match("^[aA]dded in") then print(name,desc) end
 		if not desc or #desc<12 or desc:find("not yet docu") then
 			desc=nil
 		end
@@ -90,17 +93,18 @@ for tags,link,name,info in all:gmatch('<dd>([^<]-)<a href="(.-API_.-)".->(.-)</a
 			sign="("..sign..")"
 		end
 		
-		if link:sub(1,5)=="/API_" then
+		if link and link:sub(1,10)=="/wiki/API_" then
 			local page=getpage(website..link)
 			desc=trim(purge(page:match('<meta name="description" content="(.-)"/>'))) or desc
-			sign=trim(purge(page:match('<div class="mw%-parser%-output">.-<h2>'):match("<pre>(.-)</pre>"))) or sign
+			if desc=="Needs summary." then desc=nil end
+			sign=trim(purge(page:match('<div class="mw%-parser%-output">.-<pre>(.-)</pre>'))) or sign
 		end
 		
 		if desc or sign then
 			local module,func=name:match("^([^.:]-[.:]?)([^.:]+)$")
-			if db[func] then
-				db[func].ov[module]={sign=sign,desc=desc}
-			end
+			db[name]=db[name] or {func=true,ov={}}
+			db[func]=db[func] or {func=true,ov={}}
+			db[func].ov[module]={sign=sign,desc=desc}
 		end
 	end
 end
@@ -108,7 +112,7 @@ print(website.." done")
 
 -- 4. Fill with wowprogramming doc
 
-website="http://wowprogramming.com"
+website="https://wowprogramming.com"
 mkdir(website.."/docs/api")
 
 all=getpage(website.."/docs/api.html")

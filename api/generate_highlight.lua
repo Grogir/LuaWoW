@@ -8,8 +8,10 @@
 --------------------------------------------------
 
 dofile("common.lua")
-path="https://raw.githubusercontent.com/Resike/BlizzardInterfaceResources/master/Resources"
-mkdir(path.."/Data")
+respath="https://raw.githubusercontent.com/Resike/BlizzardInterfaceResources/master/Resources"
+datapath="https://raw.githubusercontent.com/Resike/BlizzardInterfaceResources/b6abf3b3b320a2a2f1054f20ddd17df6b1a0404c/Resources/Data"
+mkdir(respath)
+mkdir(datapath)
 
 function exists(name)
 	return luaglobals and luaglobals[name] or api and api[name] or ui and ui[name]
@@ -41,19 +43,19 @@ out=getfile("highlight.model.xml")
 
 
 -- lua globals
-luaglobals=getmap(getpage(path.."/APILua.lua"))
+luaglobals=getmap(getpage(respath.."/APILua.lua"))
 out=out:gsub("<!%-%- LUAGLOBALS %-%->",getsortednames(luaglobals))
 
 -- api
-api=getmap(getpage(path.."/API.lua").."\n"..getpage(path.."/APIC.lua"))
+api=getmap(getpage(respath.."/API.lua").."\n"..getpage(respath.."/APIC.lua"))
 out=out:gsub("<!%-%- API %-%->",getsortednames(api))
 
 -- ui + ace3
-ui=getmap(getpage(path.."/WidgetAPI.lua").."\n"..getfile("Ace3.txt"))
+ui=getmap(getpage(respath.."/WidgetAPI.lua").."\n"..getfile("Ace3.txt"))
 out=out:gsub("<!%-%- UI %+ ACE3 %-%->",getsortednames(ui))
 
 -- global tables
-all=getpage(path.."/Data/GlobalTypes.lua")
+all=getpage(datapath.."/GlobalTypes.lua")
 tables={}
 for name,type in all:gmatch('(%S+) = "(%S+)"') do
 	if type~="string" and type~="function" and type~="number" and type~="boolean" and not exists(name) then
